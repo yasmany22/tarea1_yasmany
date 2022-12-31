@@ -9,7 +9,7 @@ import Modelo.Coneccion;
 import java.sql.*;
 /**
  *
- * @author ERREYES
+ * @author Yasmany
  */
 public class App_usuario {
 
@@ -20,44 +20,63 @@ public class App_usuario {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Persona person1 =  new Persona();
-        person1.setCedula("0706557998");
-        person1.setNombre("JUAN JOSE");
-        
-        Persona person2 =  new Persona();
-        person2.setCedula("0426354789");
-        person2.setNombre("ANA VICTORIA");
-        
-        
         Coneccion conn = new Coneccion().conectar();
+        
+        Persona person1 =  new Persona();
       
         
-        // persona 1
+        /*person1.setCedula("0698541245");
+        person1.setUsuario("OSCAR");
+        person1.setContrasenia("12345*.");
+        person1.setEstado(1);// lo toma como valor entero*/
         
-        if (conn.ejecutar("INSERT INTO usuario (cedula,nombre) VALUES('"+person1.getCedula()+"','"+person1.getNombre()+"')")) {
-            System.out.println("Ejecución INSERT correcta persona 1!");
-        } else {
-            System.out.println("Ocurrió un problema al ejecutar!");
-        }     
+        person1.setCedula("0458745632");
+        person1.setUsuario("JUAN JOSE");
+        person1.setContrasenia("25FT5*.");
+        person1.setEstado(1);// lo toma como valor entero
         
-       // persona 2 
+        Persona person2 =  new Persona();
+        /*person2.setCedula("070698512");
+        person2.setUsuario("Sofia");
+        person2.setContrasenia("154DRF*g_@");
+        person2.setEstado(0);*/
+        person2.setCedula("524874521");
+        person2.setUsuario("Luisa");
+        person2.setContrasenia("1DkyhykRF*g_@");
+        person2.setEstado(0);
         
-        if (conn.ejecutar("INSERT INTO usuario (cedula,nombre) VALUES('"+person2.getCedula()+"','"+person2.getNombre()+"')")) {
-            System.out.println("Ejecución INSERT correcta! persona 2");
-        } else {
-            System.out.println("Ocurrió un problema al ejecutar!");
-        }   
-        
-        
- 
+        // insert CRUD
+        try {
+            // persona 1
+            if (conn.ejecutar("INSERT INTO usuario (usuario,contrasenia,estado,cedula) VALUES('"+person1.getUsuario()+"','"+person1.getContrasenia()+"',"+person1.getEstado()+",'"+person1.getCedula()+"')")) {
+                System.out.println("Ejecución INSERT correcta persona 1!");
+            } else {
+                System.out.println("Ocurrió un problema al ejecutar!");
+            } 
+            
+        } catch (Exception e) {
+        }
+            
+       
+        try {
+            // persona 2
+           if (conn.ejecutar("INSERT INTO usuario (usuario,contrasenia,estado,cedula) VALUES('"+person2.getUsuario()+"','"+person2.getContrasenia()+"',"+person2.getEstado()+",'"+person2.getCedula()+"')")) {
+               System.out.println("Ejecución INSERT correcta persona 2!");
+           } else {
+               System.out.println("Ocurrió un problema al ejecutar!");
+           }   
+        } catch (Exception e) {
+        }
+      
         ResultSet resultados = conn.consultar("SELECT * FROM usuario");  
          
+        // el valor es leido como booleano en java con el método resultados.getBoolean()
         if (resultados != null) {
             try {
-                System.out.println("CEDULA       NOMBRE");
-                System.out.println("--------------------------------");
+                System.out.println("  ID       USUARIO       CONTRASENIA         ESTADO       CEDULA    ");
+                System.out.println("-------------------------------------------------------------------------------------------");
                 while (resultados.next()) {
-                    System.out.println(""+resultados.getString("cedula")+"       "+resultados.getString("nombre"));
+                    System.out.println(""+resultados.getInt("id")+"        "+resultados.getString("usuario")+"       "+resultados.getString("contrasenia")+"       "+resultados.getBoolean("estado")+"       "+resultados.getString("cedula"));
                 }
             } catch (SQLException e) {
             }
@@ -66,8 +85,5 @@ public class App_usuario {
         person1 = null;
         person2= null;
         System.runFinalization();
-        
-        
     }
-    
 }

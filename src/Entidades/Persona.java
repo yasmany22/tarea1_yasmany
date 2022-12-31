@@ -6,19 +6,49 @@ package Entidades;
 
 /**
  *
- * @author ERREYES
+ * @author Yasmany
  */
 public class Persona {
+
+    String usuario;
+    String contrasenia;
+    int estado; //para trabajar como boolean en mysql
     String cedula;
-    String nombre;
-    
+
     public Persona(){}
     
-    public Persona(String cedula, String nombre) {
-        this.cedula = cedula;
-        this.nombre = nombre;
-    }
     
+    public Persona(String usuario, String contrasenia, int estado, String cedula) {
+        this.usuario = usuario;
+        this.contrasenia = contrasenia;
+        this.estado = estado;
+        this.cedula = cedula;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
     public String getCedula() {
         return cedula;
     }
@@ -26,13 +56,5 @@ public class Persona {
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
- 
+   
 }

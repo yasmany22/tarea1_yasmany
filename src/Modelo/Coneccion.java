@@ -11,10 +11,10 @@ import java.sql.SQLException;
 
 /**
  *
- * @author ERREYES
+ * @author Yasmany
  */
 public class Coneccion {
-    public static final String URL = "jdbc:mysql://localhost:3306/bd_usuario";
+    public static final String URL = "jdbc:mysql://localhost:3306/bdusuario";
     public static final String USER = "root";
     public static final String CLAVE = "root";
     
@@ -42,11 +42,7 @@ public class Coneccion {
             this.conexion = conexion;
     }  
     
-    
-    
-    
-    
-    
+  
     public boolean ejecutar(String sql) {
         try {
             Statement sentencia = getConexion().createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
